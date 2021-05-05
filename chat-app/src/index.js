@@ -9,9 +9,9 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 app.get("/", (req, res) => {
+  app.use(express.static(__dirname + "/client/"));
   res.sendFile(__dirname + "/client/index.html");
 });
-app.use(express.static(__dirname + "/client"));
 io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
